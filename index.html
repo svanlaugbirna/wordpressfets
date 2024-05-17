@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress REST API Fetch</title>
+</head>
+<body>
+    <div id="content"></div>
+    <script>
+        async function fetchPosts() {
+            const response = await fetch('http://hestur-i-fostur.local/wp-json/wp/v2/pages/58');
+            const posts = await response.json();
+            console.log(posts)
+            displayPosts(posts);
+        }
+
+        function displayPosts(post) {
+            const contentDiv = document.getElementById('content');
+           // posts.forEach(post => {
+                const postDiv = document.createElement('div');
+                postDiv.innerHTML = `
+                    <p>${post.content.rendered}</p>
+                `;
+                contentDiv.appendChild(postDiv);
+           // });
+        }
+
+        fetchPosts();
+    </script>
+</body>
+</html>
+
